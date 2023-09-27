@@ -35,3 +35,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // Default tapping term
 #define TAPPING_TERM 190
 #define PERMISSIVE_HOLD
+#define TAPPING_TERM_PER_KEY
+
+// Tapping term for layer keys
+#define TAPPING_TERM_LAYER_KEYS 160

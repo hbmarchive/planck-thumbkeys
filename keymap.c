@@ -63,17 +63,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [NAV_LAYER] = LAYOUT_planck_grid(
-    KC_PSCR,   KC_MNXT,     KC_MPLY,     KC_VOLU,           KC_BRIU,     KC_TRNS,  KC_TRNS,  KC_NO,            M_PDESK,  LCTL(KC_TAB),  M_ALTT,   M_NDESK,
-    M_ISCROS,  KC_MPRV,     KC_MUTE,     KC_VOLD,           KC_BRID,     KC_TRNS,  KC_TRNS,  KC_WH_U,          KC_LEFT,  KC_DOWN,       KC_UP,    KC_RGHT,
-    M_ISWIN,   LCTL(KC_X),  LCTL(KC_C),  LSFT(LCTL(KC_C)),  LCTL(KC_V),  KC_TRNS,  KC_TRNS,  KC_WH_D,          KC_HOME,  KC_PGDN,       KC_PGUP,  KC_END,
-    KC_TRNS,   KC_TRNS,     KC_TRNS,     KC_TRNS,           KC_TRNS,     KC_TRNS,  KC_ESC,   OSL(SCUT_LAYER),  KC_TRNS,  KC_TRNS,       KC_TRNS,  KC_TRNS
+    KC_PSCR,   KC_MNXT,     KC_MPLY,     KC_VOLU,           KC_BRIU,     KC_TRNS,  KC_TRNS,  KC_NO,    M_PDESK,          LCTL(KC_TAB),  M_ALTT,   M_NDESK,
+    M_ISCROS,  KC_MPRV,     KC_MUTE,     KC_VOLD,           KC_BRID,     KC_TRNS,  KC_TRNS,  KC_WH_U,  KC_LEFT,          KC_DOWN,       KC_UP,    KC_RGHT,
+    M_ISWIN,   LCTL(KC_X),  LCTL(KC_C),  LSFT(LCTL(KC_C)),  LCTL(KC_V),  KC_TRNS,  KC_TRNS,  KC_WH_D,  KC_HOME,          KC_PGDN,       KC_PGUP,  KC_END,
+    KC_TRNS,   KC_TRNS,     KC_TRNS,     KC_TRNS,           KC_TRNS,     KC_TRNS,  KC_TRNS,  KC_ESC,   OSL(SCUT_LAYER),  KC_TRNS,       KC_TRNS,  KC_TRNS
   ),
 
   [NUM_LAYER] = LAYOUT_planck_grid(
     KC_PAST,  KC_1,     KC_2,     KC_3,     KC_PPLS,  KC_TRNS,  KC_TRNS,  KC_NO,    KC_F1,    KC_F2,    KC_F3,    KC_BSPC,
     KC_PSLS,  KC_4,     KC_5,     KC_6,     KC_PMNS,  KC_TRNS,  KC_TRNS,  KC_NO,    KC_F4,    KC_F5,    KC_F6,    KC_NO,
     KC_0,     KC_7,     KC_8,     KC_9,     KC_DOT,   KC_TRNS,  KC_TRNS,  KC_NO,    KC_F7,    KC_F8,    KC_F9,    KC_F10,
-    KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  CW_TOGG,  KC_TAB,   KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS
+    KC_TRNS,  KC_TRNS,  KC_TRNS,  CW_TOGG,  KC_TAB,   KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS
   ),
 
   [SCUT_LAYER] = LAYOUT_planck_grid(
@@ -320,6 +320,19 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
   return true;
 }
+
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    // Set the tapping term for the layer keys.
+    case LT_NAV_SPACE:
+    case LT_NUM_ENTER:
+      return TAPPING_TERM_LAYER_KEYS;
+    default:
+      return TAPPING_TERM;
+  }
+}
+
+
 
 bool caps_word_press_user(uint16_t keycode) {
   switch (keycode) {
